@@ -1,0 +1,106 @@
+body {
+    color: #02024F;
+}
+
+.pull-left p,
+.pull-right {
+    color: #fff;
+}
+
+.section-padding {
+    padding: 30px 0;
+}
+#ramka {
+    padding: 10px;
+    border: 2px solid #02024F;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+.courses .courses-wrapper {
+    /* text-align: center; */
+}
+.fa-download:hover {
+    color: #02024F;
+}
+
+.title {
+    font-family: "Noto Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen-Sans", "Ubuntu", "Cantarell", "Helvetica Neue", sans-serif;
+    font-size: 20px;
+    line-height: 20px;
+    font-weight: 700;
+    border-bottom: none;
+    margin: 0;
+}
+
+.home-hero {
+    flex: 0 0 auto;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    background-image: url("../images/logo/logo1.webp");
+    padding-top: 10%;
+    padding-left: 20%;
+}
+
+.text-info-1 {
+    width: 600px;
+    font-size: 15px;
+}
+
+.text-info-2 {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.text-info-1,
+.text-info-2 {
+    color: #02024F;
+}
+
+.home-text2 {
+    width: 100px;
+    font-size: 15px;
+    color: #02024F;
+}
+
+@media only screen and (max-width: 734px) {
+    .home-hero {
+        width: 100%;
+        height: 500px;
+        display: flex;
+        padding-top: 80px;
+        padding-left: 20px;
+    }
+}
+@media only screen and (max-width: 412px) {
+    .text-info-1 {
+        width: 400px;
+        font-size: 10px;
+    }
+    .text-info-2 {
+        font-size: 25px;
+        font-weight: bold;
+    }
+}
+@media only screen and (max-width: 375px) {
+    .home-hero {
+        width: 100%;
+        height: 500px;
+        display: flex;
+        padding-top: 80px;
+        padding-left: 20px;
+    }
+
+    .text-info-1 {
+        width: 300px;
+        font-size: 15px;
+    }
+
+    .text-info-2 {
+        font-size: 10px;
+    }
+}

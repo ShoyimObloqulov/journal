@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@accusoft/pdf-viewer": "^3.11.158639"
+  }
+}
