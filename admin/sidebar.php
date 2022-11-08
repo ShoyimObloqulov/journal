@@ -59,6 +59,12 @@
             <span class="app-menu__label">Expertlar</span>
           </a>
         </li>
+        <li>
+          <a class="app-menu__item" href="topic.php">
+            <i class="app-menu__icon fa fa-tasks" aria-hidden="true"></i>
+            <span class="app-menu__label">To'plamlar</span>
+          </a>
+        </li>
         <li class="treeview">
           <a class="app-menu__item" href="#" data-toggle="treeview">
             <i class="app-menu__icon fa fa-text-width"></i>
