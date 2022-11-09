@@ -41,4 +41,8 @@
         }
     </script>
     <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="application-name" content="The journal of Social Sciences and Researches">
+    <meta name="author" content="scientificjournalJSSR@gmail.com">
+    <meta name="description" content="The system of receiving scientific articles remotely in electronic form in our country and abroad">
+
 </head>
