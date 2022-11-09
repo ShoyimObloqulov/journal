@@ -45,26 +45,26 @@
                                 <form action="../api/topic/add.php" method="POST" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">To'plam nomi</label>
-                                        <input type="email" class="form-control" placeholder="Nomi..." name="name">
+                                        <input type="text" class="form-control" placeholder="Nomi..." name="name">
                                     </div>
                                     <div class="form-group">
                                         <label>Jurnal soni</label>
-                                        <select class="form-control" name="jurnal_soni">
+                                        <select class="form-control" name="jurnal_id">
                                             <?
                                               $sql = mysqli_query($link,"SELECT * FROM `jurnal_soni`");
                                               while($wh = mysqli_fetch_assoc($sql)){
                                             ?>
-                                            <option><?=$wh['name']?></option>
+                                            <option value="<?=$wh['id']?>"><?=$wh['name']?></option>
                                             <?}?>
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleFormControlFile1">Faylni yuklang</label>
-                                        <input type="file" accept=".docx,.doc,.pdf" class="form-control-file" id="exampleFormControlFile1">
+                                        <label>Faylni yuklang</label>
+                                        <input type="file" accept=".docx,.doc,.pdf" class="form-control-file" name="file">
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="submit" class="btn btn-primary">Save changes</button>
                                     </div>
                                 </form>
                             </div>
@@ -95,15 +95,25 @@
                                             <?=$row['name']?>
                                         </td>
                                         <td>
-                                            <?=$row['jurnal_id']?>
+                                            <?
+                                              $id=$row['jurnal_id'];
+                                              $sel = mysqli_query($link,"SELECT * FROM `jurnal_soni` WHERE id='$id'");
+                                              $r = mysqli_fetch_assoc($sel);
+                                              echo $r['name'];
+                                            ?>
                                         </td>
                                         <td>
-                                            <a href="../topic/file/<?=$row['file']?>" download="true"><i class="fa fa-download"></i></a>
+                                            <a href="../topic/file/<?=$row['file']?>" download="true">
+                                              <button class="btn btn-success"><i class="fa fa-download"></i> Yuklash</button>
+                                            </a>
                                         </td>
                                         <td>
-                                            <button class="btn btn-danger topic_d" data-row-id="<?=$row['id']?>"><i class="fa fa-trash"></i></button>
-                                            <button class="btn btn-success mark" data-row-id="<?=$row['id']?>"><i class="fa fa-check"></i></button>
-                                            <button class="btn btn-info" onclick="window.location.href='topic_edit.php?id=<?=$row['id']?>'"><i class="fa fa-edit"></i></button>
+                                            <button type="button" class="btn btn-danger topic_d" data-row-id="<?=$row['id']?>">
+                                              <i class="fa fa-trash"></i>
+                                            </button>
+                                            <button class="btn btn-info edit" data-row-id="<?=$row['id']?>">
+                                                <i class="fa fa-edit"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                     <?}?>
@@ -122,6 +132,7 @@
         $(".topic_d").each(function() {
             this.addEventListener("click", function() {
                 const rowId = this.dataset.rowId
+                console.log(rowId);
                 $.ajax({
                     url: "../api/topic/delete.php",
                     method: "POST",
@@ -134,10 +145,23 @@
                                 'success'
                             );
                             $("#id" + rowId).remove();
+                        }else{
+                          Swal.fire(
+                                'OOPS:(',
+                                'Malumot o\'chirishda hatolik',
+                                'error'
+                            );
                         }
                     }
                 });
                 return false;
+            });
+        });
+
+        $(".edit").each(function(){
+            this.addEventListener("click", function() {
+                const rowId = this.dataset.rowId
+                window.location.href="topic_edit.php?id=" + rowId;
             });
         });
     });

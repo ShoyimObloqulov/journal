@@ -8,6 +8,14 @@
     <title>Topic</title>
     <? include_once 'head.php'; ?>
     <link rel="stylesheet" href="topic/css/style.css">
+
+    <style>
+        .dow{
+            color: #111;
+            background-color: #14F4BA;
+            padding: 4px;
+        }
+    </style>
 </head>
 
 <body>
@@ -41,76 +49,44 @@
                         <div class="">
                             <h1>Collection of articles</h1>
                             <div class="accordion">
+                                <?
+                                    $j = mysqli_query($link,"SELECT * FROM `jurnal_soni`");
+                                    while ($jr = mysqli_fetch_assoc($j)) {
+                                ?>
                                 <div class="accordion-item">
                                     <div class="accordion-item-header">
-                                        <p>Journal name: </p>
+                                        <p>Journal name:
+                                            <?=$jr['name']?>
+                                        </p>
                                     </div>
                                     <div class="accordion-item-body">
-                                        <div class="accordion-item-body-content">
-                                            Web Development broadly refers to the tasks associated with developing functional websites and
-                                            applications for the Internet. The web development process includes web design, web content
-                                            development, client-side/server-side scripting and network security configuration, among other
-                                            tasks.
-                                        </div>
+                                        <?
+                                            $id = $jr['id'];
+                                            $t = mysqli_query($link,"SELECT * FROM `topic` WHERE jurnal_id='$id'");
+                                            $tr = mysqli_fetch_assoc($t);
+                                        ?>
+                                        <?
+                                            if (mysqli_num_rows($t) > 0) {
+                                                ?>
+                                                    <div class="accordion-item-body-content">
+                                                        <?=$tr['name']?>
+                                                        <a href="topic/file/<?=$tr['file']?>" class="nav-link" download="true">
+                                                            <button class="btn btn-info dow">Yuklash</button>
+                                                        </a>
+                                                    </div>
+                                                <?
+                                            } else {
+                                                ?>
+                                                    <div class="accordion-item-body-content">
+                                                        Hali jurnal yuklanmagan
+                                                    </div>
+                                                <?
+                                            }
+                                            
+                                        ?>
                                     </div>
                                 </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-item-header">
-                                        What is HTML?
-                                    </div>
-                                    <div class="accordion-item-body">
-                                        <div class="accordion-item-body-content">
-                                            HTML, aka HyperText Markup Language, is the dominant markup language for creating websites and
-                                            anything that can be viewed in a web browser.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-item-header">
-                                        What are some basic technical skills of a Front-End developer?
-                                    </div>
-                                    <div class="accordion-item-body">
-                                        <div class="accordion-item-body-content">
-                                            <ul style="padding-left: 1rem;">
-                                                <li>HTML, CSS, JavaScript</li>
-                                                <li>Frameworks (CSS and JavaScript frameworks)</li>
-                                                <li>Responsive Design</li>
-                                                <li>Version Control/Git</li>
-                                                <li>Testing/Debugging</li>
-                                                <li>Browser Developer Tools</li>
-                                                <li>Web Performance</li>
-                                                <li>SEO (Search Engine Optimization)</li>
-                                                <!-- <li>CSS Preprocessing</li> -->
-                                                <li>Command Line</li>
-                                                <li>CMS (Content Management System)</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-item-header">
-                                        What is HTTP?
-                                    </div>
-                                    <div class="accordion-item-body">
-                                        <div class="accordion-item-body-content">
-                                            HTTP, aka HyperText Transfer Protocol, is the underlying protocol used by the World Wide Web and
-                                            this protocol defines how messages are formatted and transmitted, and what actions Web servers and
-                                            browsers should take in response to various commands.
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="accordion-item">
-                                    <div class="accordion-item-header">
-                                        What is CORS?
-                                    </div>
-                                    <div class="accordion-item-body">
-                                        <div class="accordion-item-body-content">
-                                            CORS, aka Cross-Origin Resource Sharing, is a mechanism that enables many resources (e.g. images,
-                                            stylesheets, scripts, fonts) on a web page to be requested from another domain outside the domain
-                                            from which the resource originated.
-                                        </div>
-                                    </div>
-                                </div>
+                                <?}?>
                             </div>
                         </div>
                     </div>
